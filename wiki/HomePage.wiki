@@ -3,8 +3,19 @@
 
 = Introduction =
 
-Wikiwym is wiki syntax parser, implemented in JavaScript, which is (mostly) compatible with Google Code's wiki format.
+Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reasonably imitate the Google Code wiki format.
 
-*Code status:* early beta. The core features work, but there are some features to add and some corner cases to check/fix.
+*Code status:* early beta. Most of the core features work, but there are some features to add and some corner cases to check/fix.
 
 *License:* MIT
+
+=Ultra-mini HOWTO=
+
+The source tree has several files, in various stages of completion. The core parser code is in [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js GoogleWikiCodeParser.js], and is used like this:
+
+{{{
+var g = GoogleWikiCodeParser();
+var html = g.parse( " ... wiki markup code ..." );
+}}}
+
+The file [http://code.google.com/p/wikiwym/source/browse/trunk/lib/parser.js parser.js] uses the Prototype JS library to provide a as-you-type preview of wiki code. It is demonstrated at [http://wikiwym.googlecode.com/svn/trunk/index.html]. (Achtung: at the moment (20100422) parser.js uses a completely different parser implementation than `GoogleWikiCodeParser`, so they may not behave quite the same.)
