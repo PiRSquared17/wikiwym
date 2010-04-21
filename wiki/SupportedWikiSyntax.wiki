@@ -25,15 +25,16 @@ if( (i < 10) && (i > 1) ) {
 
 Only single-level lists are currently supported.
 
-  * Item 1 is _emphasized_.
-  * Item 2 is *bold*.
-  * Item 3 is *_emphasized bold_*.
+  * Item is _emphasized_.
+  * Item is *bold*.
+  * Item is *_emphasized bold_*.
   * Item is `backticked`.
 
-  # Item 4 is ~~stricken~~.
-  # Item 5 is ,,subscript,,.
-  # Item 6 is ^superscript^.
+  # Item is ~~stricken~~.
+  # Item is ,,subscript,,.
+  # Item is ^superscript^.
   # Do `<backticks block parsing of <`? (works as of r35)
+  # Can we *`bold backticked data`*? Of course.
 
 =Tables=
 
