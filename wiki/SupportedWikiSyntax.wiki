@@ -28,7 +28,7 @@ Only single-level lists are currently supported.
 
   # Item 4 is ~~stricken~~.
   # Item 5 is ,,subscript,,.
-  # Item 6 is ^subscript^.
+  # Item 6 is ^superscript^.
 
 =Tables=
 
