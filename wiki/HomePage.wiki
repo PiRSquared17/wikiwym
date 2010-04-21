@@ -9,6 +9,20 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
 
 *License:* MIT
 
+*Primary Features:*
+
+  * Fairly Small. The core parser lives in one file and has no external dependencies.
+  * It is _not_ based on regular expressions, and is more robust than
+  * Can handle "most" Google Code wiki markup.  See [SupportedWikiSyntax] for the list of what we believe works.
+  * The main parser code has a one-class, one-function interface, so it's easy to use.
+
+*Primary Misfeatures:*
+
+  * Certain wiki markup is not yet supported. See [SupportedWikiSyntax].
+  * "Inline" markup (bold, italics, etc. i.e. all markup which is not for block-level items) is only processed within a single line. i'm not 100% sure we have the same meaning of "end of line" as !GoCo does.
+  * Nested lists aren't yet implemented.
+  * Support for `<wiki:toc>` is not yet implemented.
+
 =Ultra-mini HOWTO=
 
 The source tree has several files, in various stages of completion. The core parser code is in [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js GoogleWikiCodeParser.js], and is used like this:
