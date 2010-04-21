@@ -1,0 +1,10 @@
+#summary The main page
+#labels Featured
+
+= Introduction =
+
+Wikiwym is wiki syntax parser, implemented in JavaScript, which is (mostly) compatible with Google Code's wiki format.
+
+*Code status:* early beta. The core features work, but there are some features to add and some corner cases to check/fix.
+
+*License:* MIT
