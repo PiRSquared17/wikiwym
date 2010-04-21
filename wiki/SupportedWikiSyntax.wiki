@@ -7,7 +7,7 @@ This page demonstrates the various wiki markup which is working (or believed to 
 
 =Wiki-style Links=
 
-Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. Remote URLs are also handled only if they are bracketed.
+Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
 
 =Source code blocks=
 
@@ -35,3 +35,8 @@ Only single-level lists are currently supported.
 || cell 0,0 || ,,cell 1,0,, || ^cell 2,0^ ||
 || ~~*cell 0,1*~~ || ~~cell 1,1~~ || _cell 2,1_ ||
 || ^*cell 0,2*^ (LOL! !GoCo doesn't handle superscripted bold, but our parser does) || cell 1,2 || *cell 2,2* ||
+
+=Missing=
+
+  * Auto-IMG-tagging of certain links. (TODO)
+  * ???
