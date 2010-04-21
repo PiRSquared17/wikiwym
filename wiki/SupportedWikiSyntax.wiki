@@ -1,0 +1,37 @@
+#summary This page demonstrates the support parser features
+#labels Featured
+
+= Introduction =
+
+This page demonstrates the various wiki markup which is working (or believed to be working) in the [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js current parser code].
+
+=Wiki-style Links=
+
+Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. Remote URLs are also handled only if they are bracketed.
+
+=Source code blocks=
+
+{{{
+if( (i < 10) && (i > 1) ) {
+    print("hi, world!");
+}
+}}}
+
+=Lists=
+
+Only single-level lists are currently supported.
+
+  * Item 1 is _emphasized_.
+  * Item 2 is *bold*.
+  * Item 3 is *_emphasized bold_*.
+  * Item is `backticked`.
+
+  # Item 4 is ~~stricken~~.
+  # Item 5 is ,,subscript,,.
+  # Item 6 is ^subscript^.
+
+=Tables=
+
+|| cell 0,0 || cell 1,0 || cell 2,0 ||
+|| cell 0,1 || cell 1,1 || cell 2,1 ||
+|| cell 0,2 || cell 1,2 || cell 2,2 ||
