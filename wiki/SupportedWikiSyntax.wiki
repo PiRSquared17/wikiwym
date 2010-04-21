@@ -1,4 +1,4 @@
-#summary This page demonstrates the support parser features
+#summary This page demonstrates the supported parser features.
 #labels Featured
 
 = Introduction =
@@ -34,7 +34,7 @@ Only single-level lists are currently supported.
   # Item is ,,subscript,,.
   # Item is ^superscript^.
   # Do `<backticks block parsing of <`? (works as of r35)
-  # Can we *`bold backticked data`*? Of course.
+  # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
 
 =Tables=
 
