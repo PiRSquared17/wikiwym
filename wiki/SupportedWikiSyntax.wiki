@@ -31,8 +31,8 @@ Only single-level lists are currently supported.
   * Item is `backticked`.
 
   # Item is ~~stricken~~.
-  # Item is ,,subscript,,.
-  # Item is ^superscript^.
+  # Item is ,,subscripted,,.
+  # Item is ^superscripted^.
   # Do `<backticks block parsing of <`? (works as of r35)
   # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
 
