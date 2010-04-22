@@ -35,3 +35,5 @@ var html = g.parse( " ... wiki markup code ..." );
 }}}
 
 The file [http://code.google.com/p/wikiwym/source/browse/trunk/lib/parser.js parser.js] uses the Prototype JS library to provide a as-you-type preview of wiki code. It is demonstrated at [http://wikiwym.googlecode.com/svn/trunk/index.html]. (Achtung: at the moment (20100422) parser.js uses a completely different parser implementation than `GoogleWikiCodeParser`, and they do not behave identically.)
+
+There is another live demo, based on jQuery and the `GoogleWikiCodeParser` class, at: [http://wikiwym.googlecode.com/svn/trunk/index-jquery.html].
