@@ -1,7 +1,8 @@
 #summary Fabien's Amazing Editor Preview Bookmarklet
 #labels Featured
 
-= Introduction =
+= The Google Code Wiki Editor Live-Preview Bookmarklet =
+(Or GCWELPB, for short.)
 
 Founder of this project, Fabien, created a bookmarklet which provides a real-time preview mode in the Google Code wiki editor.
 
