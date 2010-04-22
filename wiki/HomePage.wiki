@@ -15,7 +15,6 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
   * It is not based on regular expressions. For the most part it scans char-by-char, so it is more robust in handling things like nested markup (e.g. _*italicized bold*_) than regex-based implementations.
   * Can handle "most" Google Code wiki markup.  See [SupportedWikiSyntax] for what we believe works.
   * The main parser code has a one-class, one-function interface, so it's easy to use.
-  * If the parser detects mis-closed inlined markup it adds a big, fat, red and yellow warning marker to the output.
 
 *Primary Misfeatures:*
 
