@@ -71,5 +71,4 @@ The HR element is represented by `----` on a line by its own:
 
 =Missing=
 
-  * Auto-IMG-tagging of certain links. (TODO)
-  * ???
+  * Block-quoting (TODO).
