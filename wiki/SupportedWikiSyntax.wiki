@@ -76,6 +76,13 @@ Only single-level lists are currently supported.
 The HR element is represented by `----` on a line by its own:
 ----
 
+=Weird Cases=
+
+These are here only for testing/debugging. They may or may not be correctly rendered (that's what i'm trying to find out!)...
+
+{{{(/* */)}}} should == `(/* */)`
+
+
 
 =Missing=
 
