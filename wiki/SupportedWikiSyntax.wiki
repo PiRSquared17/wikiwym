@@ -9,6 +9,13 @@ For testing purposes, this page gets programmatically pulled down to a developme
 
 The goal is not to achieve 100% compatibility with !GoCo, but to have a tool which can be used to provide a reasonably accurate preview of a !GoCo-formatted page before committing it to a !GoCo-hosted project's source code repository. It "could" be used as the bases of a standalone wiki implementation, but that's not the goal.
 
+A good way to get a feel for what this code can and cannot do is to browse your own wiki pages with it:
+
+  * [http://fossil.wanderinghorse.net/demos/wikiwym/]
+
+From there you can browse the wiki pages from any Google Code project which has wiki pages in its Subversion repository, and they will be rendered by this code.
+
+
 =Wiki-style Links=
 
 Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
