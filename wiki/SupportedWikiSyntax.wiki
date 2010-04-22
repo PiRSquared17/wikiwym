@@ -41,6 +41,14 @@ if( (i < 10) && (i > 1) ) {
 }
 }}}
 
+=Block Quotes=
+
+Someone once said:
+
+  This sentence will be quoted in the future as the canonical example
+  of a quote that is so important that it should be visually separate
+  from the rest of the text in which it appears.
+
 =Lists=
 
 Only single-level lists are currently supported.
@@ -71,4 +79,5 @@ The HR element is represented by `----` on a line by its own:
 
 =Missing=
 
-  * Block-quoting (TODO).
+ * Nested lists.
+ * ???
