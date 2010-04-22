@@ -36,13 +36,18 @@ Only single-level lists are currently supported.
   # Do `<backticks block parsing of <`? (works as of r35)
   # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
 
-----
 
 =Tables=
 
 || cell 0,0 || ,,cell 1,0,, || ^cell 2,0^ ||
 || ~~*cell 0,1*~~ || ~~cell 1,1~~ || _cell 2,1_ ||
 || ^*cell 0,2*^ (LOL! !GoCo doesn't handle superscripted bold, but our parser does) || cell 1,2 || *cell 2,2* ||
+
+=Misc.=
+
+The HR element is represented by `----` on a line by its own:
+----
+
 
 =Missing=
 
