@@ -20,6 +20,19 @@ From there you can browse the wiki pages from any Google Code project which has 
 
 Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
 
+Images are also handled:
+
+Without a link:
+`[http://s11n.net/img/logo/logo.lightblue.jpg]`
+
+[http://s11n.net/img/logo/logo.lightblue.jpg]
+
+With a link:
+`[http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]`
+
+[http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]
+
+
 =Source code blocks=
 
 {{{
