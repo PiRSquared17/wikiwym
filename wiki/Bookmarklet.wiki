@@ -1,4 +1,5 @@
 #summary Fabien's Amazing Editor Preview Bookmarklet
+#labels Featured
 
 = Introduction =
 
