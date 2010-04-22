@@ -12,11 +12,15 @@ To install it:
 
 First, copy the following text into your clipboard:
 
+
 {{{
 javascript:void(function(){var%20s=document.createElement("script");s.src="http://wikiwym.googlecode.com/svn/trunk/bookmarklet.js";document.getElementsByTagName("head")[0].appendChild(s);}())
 }}}
 
-(Sorry, but the wiki won't let me create a link to that construct.)
+(Sorry, but the !GoCo wiki won't let me create a link to that construct.
+
+<a href='javascript:void(function(){var%20s=document.createElement("script");s.src="http://wikiwym.googlecode.com/svn/trunk/bookmarklet.js";document.getElementsByTagName("head")[0].appendChild(s);}())'>If you are using our parser to view this page, try copying this link to your clipboard</a> or dragging it to your bookmark bar. (If you are viewing this page in via Google Code then that link is elided, despite the docs which say it should work.)
+
 
 Then:
 
