@@ -15,14 +15,15 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
   * It is not based on regular expressions. For the most part it scans char-by-char, so it is more robust in handling things like nested markup (e.g. _*italicized bold*_) than regex-based implementations.
   * Can handle "most" Google Code wiki markup.  See [SupportedWikiSyntax] for what we believe works.
   * The main parser code has a one-class, one-function interface, so it's easy to use.
+  * In some ways it's a better Google Code wiki parser than Google Code's wiki parser, as it can handle certain "strange, yet legal" linking constructs which !GoCoWi doesn't natively handle.
 
 *Primary Misfeatures:*
 
   * Certain wiki markup is not yet supported. See [SupportedWikiSyntax].
   * "Inline" markup (bold, italics, etc. i.e. all markup which is not for block-level items) is only processed within a single line. i'm not 100% sure we have the same meaning of "end of line" as !GoCo does.
   * Nested lists aren't yet implemented.
-  * Support for `<wiki:toc>` is not yet implemented.
-  * There are not yet any configurable options. Use it as-is or hack it to suit.
+  * Support for `<wiki:toc>` is only partially implemented.
+  * There are not yet many configurable options. Use it as-is or hack it to suit.
 
 =Ultra-mini HOWTO=
 
@@ -33,7 +34,7 @@ var g = GoogleWikiCodeParser();
 var html = g.parse( " ... wiki markup code ..." );
 }}}
 
-The file [http://code.google.com/p/wikiwym/source/browse/trunk/lib/parser.js parser.js] uses the Prototype JS library to provide a as-you-type preview of wiki code. It is demonstrated at [http://wikiwym.googlecode.com/svn/trunk/index.html]. (Achtung: at the moment (20100422) parser.js uses a completely different parser implementation than `GoogleWikiCodeParser`, and they do not behave identically.)
+The file [http://code.google.com/p/wikiwym/source/browse/trunk/lib/parser.js parser.js] uses the Prototype JS library to provide a as-you-type preview of wiki code. It is demonstrated at [http://wikiwym.googlecode.com/svn/trunk/index.html].
 
 There is another live demo, based on jQuery and the `GoogleWikiCodeParser` class, at: [http://wikiwym.googlecode.com/svn/trunk/index-jquery.html].
 
