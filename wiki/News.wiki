@@ -1,0 +1,13 @@
+#summary Announcements of interesting goings-on vis-a-vis this project.
+
+Project-related news (newest items at the top)...
+
+*23 April 2010:*
+  * The Subversion branch named "stable" is now the "release" branch. Clients who don't want to download broken code should use that branch instead of the trunk (which most people instinctively tend to download).
+
+*22 April 2010:*
+  * Core parser mostly works. [http://fossil.wanderinghorse.net/demos/wikiwym/ Wiki preview/editor app] rolled out.
+
+*21(?) April 2010:*
+
+  * Wikiwym project started by Fabien Ménager. Stephan Beal joined shortly afterwards.
