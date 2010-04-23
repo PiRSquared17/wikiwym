@@ -1,0 +1,77 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project type="Local" name="wikiwym" encoding="utf8" >
+    <upload/>
+    <author/>
+    <email/>
+    <defaultDTD>-//W3C//DTD HTML 4.01 Transitional//EN</defaultDTD>
+    <item url="style.css" uploadstatus="1" />
+    <item url="index.html" uploadstatus="1" />
+    <item url="lib/" uploadstatus="1" />
+    <item url="lib/prototype.js" uploadstatus="1" />
+    <item url="lib/parser.js" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <annotations/>
+    <item url="lib/GoogleCodeWikiParser.js" uploadstatus="1" />
+    <item url="lib/tests/" uploadstatus="1" />
+    <item url="lib/tests/v8-juice-GCWP.js" uploadstatus="1" />
+    <item url="lib/tests/v8-juice-tests.make" uploadstatus="1" />
+    <item url="index-jquery.html" />
+    <item url="GoCoWi-previewer.html" />
+    <item url="lib/JSONMessage/" />
+    <item url="lib/JSONMessage/extendClass.js" />
+    <item url="lib/JSONMessage/jquery-1.3.2.min.js" />
+    <item url="lib/JSONMessage/jquery-1.4.2.js" />
+    <item url="lib/JSONMessage/jquery.bogomenu.js" />
+    <item url="lib/JSONMessage/jquery.html.js" />
+    <item url="lib/JSONMessage/json2.js" />
+    <item url="lib/JSONMessage/JSONAble.inc.js" />
+    <item url="lib/JSONMessage/JSONMessage.inc.js" />
+    <item url="lib/JSONMessage/JSONMessage.inc.php" />
+    <item url="lib/JSONMessage/JSONMessage.js.php" />
+    <item url="lib/JSONMessage/JSONMessage.localconfig.js" />
+    <item url="lib/JSONMessage/JSONRequest-dispatch.php" />
+    <item url="lib/JSONMessage/JSONUtil.inc.php" />
+    <item url="lib/JSONMessage/response/" />
+    <item url="lib/JSONMessage/response/ChuckNorris.inc.php" />
+    <item url="lib/JSONMessage/response/clearSession.inc.php" />
+    <item url="lib/JSONMessage/response/cookie.inc.php" />
+    <item url="lib/JSONMessage/response/curl.inc.php" />
+    <item url="lib/JSONMessage/response/env.inc.php" />
+    <item url="lib/JSONMessage/response/fortune.inc.php" />
+    <item url="lib/JSONMessage/response/googlecode/" />
+    <item url="lib/JSONMessage/response/local/" />
+    <item url="lib/JSONMessage/response/login.inc.php" />
+    <item url="lib/JSONMessage/response/serverSession.inc.php" />
+    <item url="lib/JSONMessage/response/sleep.inc.php" />
+    <item url="lib/JSONMessage/response/test/" />
+    <item url="lib/JSONMessage/response/throw.inc.php" />
+    <item url="lib/JSONMessage/response/googlecode/getWikiList.inc.php" />
+    <item url="lib/JSONMessage/response/googlecode/getWikiPage.inc.php" />
+    <item url="lib/JSONMessage/response/local/foo/" />
+    <item url="lib/JSONMessage/response/local/localEventCheck.inc.php" />
+    <item url="lib/JSONMessage/response/local/foo/bar.inc.php" />
+    <item url="lib/JSONMessage/response/test/localEventCheck.inc.php" />
+    <item url="GoCoWi-previewer.css" />
+    <item url="upload-demo-site.sh" />
+    <item url="bookmarklet.js" />
+    <item url="GoCoWi-bookmarklet.js" />
+    <item url="lib/jsdifflib/difflib.js" />
+    <item url="lib/jsdifflib/" />
+    <item url="lib/jsdifflib/diffview.css" />
+    <item url="lib/jsdifflib/diffview.js" />
+    <item url="lib/prettify/" />
+    <item url="lib/prettify/lang-hs.js" />
+    <item url="lib/prettify/lang-lisp.js" />
+    <item url="lib/prettify/lang-lua.js" />
+    <item url="lib/prettify/lang-ml.js" />
+    <item url="lib/prettify/lang-proto.js" />
+    <item url="lib/prettify/lang-sql.js" />
+    <item url="lib/prettify/lang-vb.js" />
+    <item url="lib/prettify/lang-wiki.js" />
+    <item url="lib/prettify/prettify.css" />
+    <item url="lib/prettify/prettify.js" />
+  </project>
+</webproject>

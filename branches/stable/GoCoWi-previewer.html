@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Google Code wiki syntax editor</title>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script>
+    <script src='lib/jsdifflib//difflib.js' type='text/javascript'></script>
+    <script src='lib/jsdifflib//diffview.js' type='text/javascript'></script>
+    <link href='lib/jsdifflib//diffview.css' rel='stylesheet' type='text/css'></script>
+  <script src='lib/JSONMessage/JSONMessage.js.php' type='text/javascript'></script>
+  
+  <script src='lib/jsdifflib//difflib.js' type='text/javascript'></script>
+  <link type="text/css" rel="stylesheet" href="GoCoWi-previewer.css" />
+  <script src="lib/GoogleCodeWikiParser.js" type="text/javascript"></script>
+  <link href="lib/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="lib/prettify/prettify.js"></script>
+  <style type='text/css'>
+    #ajaxNotification {
+        position:absolute;
+        top:0;
+        left:0;
+        border: 1px inset black;
+        background-color:#773333;
+        color:white;
+        opacity:0.75;
+    }
+  </style>
+  <script type="text/javascript">
+    var ThisApp = {
+        gcwp:null,
+        project:null,
+        textarea:null,
+        preview:null,
+        projectInput:null,
+        btnProjectLoad:null,
+        pageList:null,
+        hiddenDefaultWiki:null,
+        homeProject:'wikiwym',
+        diffMode:false,
+        pageCache: {}
+    };
+    jQuery(document).ready(function(JQ) {
+        jQuery.noConflict();
+        ThisApp.gcwp = new GoogleCodeWikiParser();
+        ThisApp.preview = jQuery('#wikicontent');
+        ThisApp.textarea = jQuery('#textarea');
+        ThisApp.hiddenDefaultWiki = jQuery('#DefaultWikiText');
+        ThisApp.textarea.attr('value', ThisApp.hiddenDefaultWiki.text());
+        ThisApp.projectInput = jQuery('#GoCoProjectName');
+        ThisApp.btnProjectLoad  = jQuery('#LoadProjectButton');
+        ThisApp.pageList = jQuery('#WikiPageList');
+        ThisApp.textarea.keypress(function(event) {
+            if ((event.keyCode == '13'/*\r*/) || (event.keyCode=='9'/*tab*/)) {
+                //event.preventDefault();
+                updateView();
+            }
+        });
+        ThisApp.projectInput.change(function(event) {
+            //if ((event.keyCode == '13')  || (event.keyCode=='9'/*tab*/)) {
+            if( jQuery(this).attr('value') != ThisApp.project )
+            {
+                loadProjectList();
+            }
+            //}
+        });
+        ThisApp.cbEnableWarn = jQuery('#optionEnableWarnings');
+        ThisApp.cbEnableWarn.click( function() {
+            ThisApp.gcwp.options.disableWarnings = jQuery(this).is(':checked');
+            updateView();
+            //alert( ThisApp.gcwp.options.disableWarnings );
+        });
+        ThisApp.cbDiffMode = jQuery('#optionDiffMode');
+        ThisApp.cbDiffMode.click( function() {
+            ThisApp.diffMode = jQuery(this).is(':checked');
+            updateView();
+            //alert( ThisApp.gcwp.options.disableWarnings );
+        });
+        if(1)
+        {
+            var sel = jQuery('#SelectProject');
+            //jQuery('option',sel).
+            sel.change( function(){
+                var val = jQuery('option:selected',this).attr('value');
+                if( ! /^-/.test(val) )
+                {
+                    loadProjectList( val );
+                }
+            });
+        }
+        if(1)
+        {  // Add a visual notification when JSONRequest messages are pending...
+            var notif = jQuery('#ajaxNotification');
+            notif.hide();
+            notif.postCount = 0;
+            notif.fadeSpeed = 'fast';
+            notif.updateMessage = function(n)
+            {
+                this.postCount += n;
+                this.text( this.postCount + ' pending JSONRequest connection(s)...' );
+                if( 1 == this.postCount ) this.fadeIn(this.fadeSpeed);
+                else if( ! this.postCount ) this.fadeOut(this.fadeSpeed);
+            };
+            JSONRequest.options.ajax.beforePost = function(req,opt)
+            {
+                notif.updateMessage(1);
+            };
+            JSONRequest.options.ajax.afterPost = function(req,opt)
+            {
+                notif.updateMessage(-1);
+            };
+        }
+        
+        goHome();
+    });
+    function updateView()
+    {
+        try
+        {
+            var c = ThisApp.textarea.attr('value');
+            if(!ThisApp.diffMode)
+            {
+                c = ThisApp.gcwp.parse(c);
+                if( ThisApp.pageName )
+                {
+                    c = '<h1>'+ThisApp.pageName+'</h1>'+c;
+                }
+                ThisApp.preview.html( c );
+                if(1)
+                {
+                    // obligatory layout kludge:
+                    var wid = jQuery('#layout').width() || jQuery('body').width() || 800;
+                    var ht =  ThisApp.preview.height() || jQuery('body').height() || 800;
+                    wid = (wid-(wid/25))/2;
+                    ThisApp.textarea.css({width:wid, height:ht});
+                    //ThisApp.preview.css({width:wid});
+                }
+                /**
+                    Update links within the preview area:
+
+                    - those starting with "http" or '#' are left as-is.
+
+                    - Links where the href element exactly matches
+                    one of the pages for the current project will
+                    cause that page to load.
+                */
+                jQuery('a',ThisApp.preview)
+                    .not('[href^="http"]')
+                    .not('[href^=#]')
+                    .click(function(){
+                        var self = jQuery(this);
+                        var hr = self.attr('href');
+                        var linkto = jQuery('a',ThisApp.pageList).filter('[text='+hr+']');
+                        if( linkto.length )
+                        {
+                            loadWikiPage( hr );
+                            return false;
+                        }
+                        //else if( /^http/i, hr ) return true;
+                        else
+                        {
+                            alert("This link is disabled by this application.");
+                            return false;
+                        }
+                        // FIXME: we could point them back to the original source or load them.
+                });
+                prettyPrint()/* updates {{{code}}} blocks. */;
+            }
+            else if(c) // diff mode
+            {
+                var orig = ThisApp.pageCache[ThisApp.pageName];
+                var base = difflib.stringAsLines(orig ? orig : c);
+                var newtxt = difflib.stringAsLines(c);
+                // create a SequenceMatcher instance that diffs the two sets of lines
+                var sm = new difflib.SequenceMatcher(base, newtxt);
+                // get the opcodes from the SequenceMatcher instance
+                // opcodes is a list of 3-tuples describing what changes should be made to the base text
+                //      in order to yield the new text
+                var opcodes = sm.get_opcodes();
+                var diffoutputdiv = ThisApp.preview;
+                diffoutputdiv.empty();
+                var contextSize = null;
+                // build the diff view and add it to the current DOM
+                diffoutputdiv.append(diffview.buildView({
+                    baseTextLines:base,
+                    newTextLines:newtxt,
+                    opcodes:opcodes,
+                    // set the display titles for each resource
+                    baseTextName:"Their Copy",
+                    newTextName:"Your Copy",
+                    contextSize:contextSize,
+                    viewType: 1 //$("inline").checked ? 1 : 0
+                }));
+                // scroll down to the diff view
+                //window.location = url + "#diff";
+            }
+
+        }
+        catch(e)
+        {
+            alert("Exception while parsing wiki code:\n"+e);
+        }
+    }
+
+    // JSONRequest.post() onResponse() handler.
+    function processLoadedWikiPage(resp,req)
+    {
+        if( 0 != resp.resultCode() )
+        {
+            alert("Wiki page request returned error code #"+resp.resultCode()
+                +"\n"+resp.resultText());
+            return;
+        }
+        var p = resp.payload();
+        ThisApp.pageName = p.page;
+        ThisApp.pageCache[p.page] = p.content;
+        ThisApp.textarea.attr('value',p.content);
+        updateView();
+    }
+
+    function loadWikiPage(pageName)
+    {
+        ThisApp.pageName = null;
+        ThisApp.textarea.text("Loading page "+ThisApp.project+'/'+pageName+' from Google Code subversion...');
+        updateView();
+        //alert("Clicked "+pg);
+        var r = new JSONRequest({type:'googlecode/getWikiPage',
+                payload:{
+                    project:ThisApp.project,
+                    page:pageName
+                }});
+        r.post( {onResponse:processLoadedWikiPage} );
+    }
+
+    // JSONRequest.post() onResponse() handler.
+    function processLoadedProjectList(resp,req)
+    {
+        if( 0 != resp.resultCode() )
+        {
+            alert("Wiki list request returned error code #"+resp.resultCode()
+                +"\n"+resp.resultText());
+            return;
+        }
+        var p = resp.payload();
+        var li = p.pages;
+        if( !li || !li.length )
+        {
+            alert("Either the project has no wiki pages or fetching the list failed for an unknown reason.");
+            return;
+        }
+        ThisApp.project = p.project;
+        //alert("Got page list:\n"+JSON.stringify(li,undefined,2));
+
+        function pageClick()
+        {
+            loadWikiPage( jQuery(this).text() );
+            return false;
+        }
+        var jli = ThisApp.pageList;
+        var link = "<a href='http://code.google.com/p/"+ThisApp.project+"' target='_new'>"
+                +ThisApp.project+"</a>";
+        jli.empty().append(jQuery('<b></b>').html(link+" wiki pages: "));
+        var i, a;
+        for( i = 0; i < li.length; ++i )
+        {
+            a = jQuery('<a href="#"></a>');
+            a.text( li[i] ).click( pageClick );
+            jli.append( a );
+            if( i < (li.length-1) ) jli.append(' | ');
+        }
+    }
+    function loadProjectList(proj)
+    {
+        proj = proj || ThisApp.projectInput.attr('value');
+        ThisApp.projectInput.attr('value',proj);
+        if( ! /^\S+$/.test(proj) )
+        {
+            alert("You must enter a Google Code project name first!");
+            return;
+        }
+        ThisApp.pageList.empty().text('Loading wiki page list for '+ThisApp.project+'...');
+        var r = new JSONRequest({type:'googlecode/getWikiList',
+                    payload:{
+                        project:proj
+                    }});
+        r.post( {onResponse:processLoadedProjectList} );
+    }
+    function goHome()
+    {
+        ThisApp.project = ThisApp.pageName = null;
+        var val = ThisApp.hiddenDefaultWiki.html();
+        ThisApp.textarea.attr('value', val );
+        ThisApp.pageCache[ThisApp.pageName] = val; // necessary for diff to work for the local page.
+        updateView();
+        //if( ThisApp.project != ThisApp.homeProject )
+        loadProjectList(ThisApp.homeProject);
+    }
+
+  </script>
+</head>
+<body>
+	<table class="layout" style='width:98%'>
+		<tr>
+<!--   
+			<td class="layout" style="border-bottom: 1px solid #999; padding: 2px;" colspan="2">
+			  Copy/paste/edit the wiki code in the textarea on the left
+              click the Update button to update the preview on the right. It will also update each time
+              you tap the ENTER key in the left-side editor.
+		  </td>
+  -->      
+            <td class="layout" style="border-bottom: 1px solid #999; padding: 2px;" align='center' colspan="2">
+            <h1><a href='http://code.google.com/p/wikiwym/'>Wikiwym</a> Wiki Parser Demo</h1>
+          </td>
+		</tr>
+  <tr>
+  <td colspan=2>
+    Google Code project name: <input type='text' id='GoCoProjectName' cols='40' value='wikiwym'/>
+    or: <select id='SelectProject'>
+    <option>--Select Project--</option>
+    <option>v8</option>
+    <option>v8-juice</option>
+    <option>v8cgi</option>
+    <option>yapeal</option>
+    <option>qboard</option>
+    <option>whefs</option>
+    <option>wikiwym</option>
+    <option>cproxyv8</option>
+    </select>
+    <!--
+    <input type='button' id='LoadProjectButton' onclick='loadProjectList();return false;' value='Load page list.'></input>
+    -->
+    <span id='WikiPageList'></span>
+    <br/>
+  </td>
+  </tr>
+  <tr>
+    <td align='left'>
+        <input type='button' onclick="goHome();return false;" value="Home"></input>
+        <span class='container' title='Note that warnings may be caused by some malformed wiki code or bugs in this parser.'>Disable parser warnings? <input type='checkbox' id='optionEnableWarnings' /></span>
+        <span class='container' title='Switch between preview and diff modes.'>Diff mode?<input type='checkbox' id='optionDiffMode' /></span>
+    </td>
+    <td align='left'>
+        <input type='button' onclick="updateView();return false;" value="Update Preview"></input>
+    </td>
+  </tr>
+  <tr><th>Google Code-style Wiki Markup</th><th>HTML</th></tr>
+  <tr>
+    <td class="layout" width='50%' valign='top' align='left'>
+        <textarea id="textarea" wrap="soft" rows="50" class="editor">
+If you see this text then your browser cannot handle the JavaScript needed
+to run this application. Sorry. Try <a href='http://www.google.com/chrome'>Google Chrome</a>.
+</textarea>
+     </td>
+    <td valign='top' align='left'><div id="wikicontent" class="layout"  width='50%'></div></td>
+    </tr>
+</table>
+<!--
+<wiki:toc max_depth=3></wiki:toc>
+-->
+<div id='DefaultWikiText' style='visibility:hidden'>
+=[http://code.google.com/p/wikiwym Wikiwym] demonstration!=
+
+=Using this Application=
+In the text field at the top of the screen you can enter the name of a project hosted at
+[http://code.google.com Google Code] to load the list of wiki pages for that project
+(taken from their SVN repository). Then click on a page name to preview it here.
+
+You can edit the wiki markup. Changes made will be updates in the preview/diff view
+when you tap Enter or click the Update button.
+
+
+=About this Application=
+This app was written by [http://wanderinghorse.net/home/stephan/ Stephan Beal] with a little help from:
+
+  * [http://fossil.wanderinghorse.net/repos/JSONMessage JSONMessage] for the AJAX/RPC support. (i.e. fetching remote wiki pages.)
+  * [http://www.jquery.com jQuery] to simplify the DOM manipulation.
+  * [http://code.google.com/p/wikiwym Wikiwym] for the wiki-to-HTML conversion.
+  * [http://code.google.com/u/fabien.menager/ Fabien M&#0233;nager] provided the initial wiki-parsing code and inspiration.
+  * [http://code.google.com/p/google-code-prettify/ google-code-prettify] for the syntax highlighting in source code blocks.
+  * [http://getfirebug.com/ Firebug] (in [http://www.getfirefox.com Firefox]) was often helpful, but most testing took place in [http://www.google.com/chrome Google Chrome]. (Running on Linux, of course.)
+  * [http://kdewebdev.org Quanta/KDEWebDev] as the dev environment (because Emacs can't indent !JavaScript worth a damn).
+  * A bacon and egg sandwich to curb the hunger in the middle of the hacking session.
+  * [http://www.bobross.com Bob Ross]. He's The Man.
+
+=Potential TODOs=
+
+  * Install a client-side cache for requested pages and project wiki lists, with a timeout/expiry time on cache entries (handled via a `setInterval()` loop). The RPC/messaging framework gives us a hook-in place to do this with, but it needs to be coded.
+  * With the cache in place we can allow swapping between multiple pages, keeping any hand-edited changes between swaps. i.e. one could work on multiple pages at a time.
+  * A history list of pages/projects visits this session, to allow faster swapping between them.
+  * Ability to load a specific version of a wiki page.
+
+All of that is simple enough to do, but as of this moment i've been awake 25 hours and hacking on this code the last 19 of them, and i'm
+too tired to deal with new "nice-to-have" features.
+
+[http://wanderinghorse.net/home/stephan/ http://wanderinghorse.net/home/stephan/stephan_beal_sylt_072006_small.jpg]
+</div>
+<span id='ajaxNotification'></span>
+<!--
+  * *bold* _emphasized_ *_bold emphasized ^SuperScript^!_*.
+  * item 2
+  * item 3
+
+|| *a* || *b* || *c*||
+|| a2 || b2 || c2||
+|| a3 || b3 || c3||
+
+  # ~~item~~
+  # _~~item~~_
+  * item
+
+Intentional errors:
+
+  * *unterminated bold
+  * unterminated _*italics*
+  * unterminated ^sup
+  * mis-terminated ,,sub,
+  * unterminated ,,sub
+
+(If those are NOT _all_ marked with errors, something is broken.)
+-->
+</body>
+</html>

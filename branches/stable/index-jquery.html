@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Google Code wiki syntax editor</title>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script>
+  <link type="text/css" rel="stylesheet" href="GoCoWi-previewer.css" />
+  <script src="lib/GoogleCodeWikiParser.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var gcwp;
+    jQuery(document).ready(function(JQ) {
+        jQuery.noConflict();
+        gcwp = new GoogleCodeWikiParser();
+        updateView();
+        jQuery('#textarea').keypress(function(event) {
+            if (event.keyCode == '13') {
+                //event.preventDefault();
+                updateView();
+            }
+        });
+    });
+    function updateView()
+    {
+        var c = jQuery('#textarea').attr('value');
+        try
+        {
+            c = gcwp.parse(c)
+            jQuery('#wikicontent').html( c );
+        }
+        catch(e)
+        {
+            alert("Exception while parsing wiki code:\n"+e);
+        }
+    }
+  </script>
+</head>
+<body>
+	<table class="layout">
+		<tr>
+			<td class="layout" style="border-bottom: 1px solid #999; padding: 2px;" colspan="2">
+			  Copy/paste the wiki code in the textarea on the left, edit it, and
+              click the button to update the preview on the right. It will also update each time
+              you tap the ENTER key in the left-side editor.
+     <br />
+     <input type='button' onclick="updateView();return false;" value="Update Preview"></input>
+		  </td>
+		</tr>
+		<tr>
+			<td class="layout">
+<textarea id="textarea" wrap="soft" rows="50" class="editor">
+=[http://code.google.com/p/wikiwym Wikiwym] demonstration!=
+
+  * *bold* _emphasized_ and *_bold emphasized ^SuperScript^!_*.
+  * item 2 is ~~stricken~~
+  * item 3 is *~~boldly stricken~~*
+  * item 4 is _~~*stricken boldly with emphasis*~~_
+
+|| *a* || *b* || *c*||
+|| a2 || ~~b2~~ || c2||
+|| *_a3_* || b3 || *~~c3~~*||
+
+  # ~~item~~
+  # _~~item~~_
+  * item
+
+Intentional errors:
+
+  * *unterminated bold
+  * unterminated _*italics*
+  * unterminated ^sup
+  * mis-terminated ,,sub,
+  * unterminated ,,sub
+  * [UnterminatedLink
+
+(If those are NOT _all_ marked with errors, something is broken.)
+
+*Happy Hacking!*
+
+-- [http://wanderinghorse.net/home/stephan/ stephan beal]
+
+[http://wanderinghorse.net/home/stephan/ http://wanderinghorse.net/home/stephan/stephan_beal_sylt_072006_small.jpg]
+</textarea>
+     </td>
+		 <td id="wikicontent" class="layout"></td>
+		</tr>
+	</table>
+</body>
+</html>
