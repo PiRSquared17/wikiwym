@@ -1,4 +1,5 @@
 #summary A sandbox for testing differences between GoCo and our parser.
+#labels Deprecated
 
 
 Currently in test...
