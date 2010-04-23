@@ -30,7 +30,7 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
 The source tree has several files, in various stages of completion. The core parser code is in [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js GoogleWikiCodeParser.js], and is used like this:
 
 {{{
-var g = GoogleWikiCodeParser();
+var g = new GoogleWikiCodeParser();
 var html = g.parse( " ... wiki markup code ..." );
 }}}
 
