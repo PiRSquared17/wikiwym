@@ -1,0 +1,9 @@
+#summary Notable TODOs
+
+= TODOs =
+
+The more notable TODOs, in no particular order:
+
+  * Nested lists.
+  * Certain corner cases (or odd usages) of the inline markups do not match GC's interpretations.
+  * Refactor the parser to generate an object tree. This could then be used to generate formats other than HTML.
