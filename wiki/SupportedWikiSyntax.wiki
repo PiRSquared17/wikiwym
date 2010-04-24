@@ -17,12 +17,19 @@ A good way to get a feel for what this code can and cannot do is to browse your 
 
 From there you can browse the wiki pages from any Google Code project which has wiki pages in its Subversion repository, and they will be rendered by this code. You can also use it as an editor, including a preview, and then copy/paste the changes back into Google Code when you're happy with them.
 
+=Inlined Markup=
 
-=Wiki-style Links=
+"Inlined" markup is stuff like *bold* and _emphasis_, which appear on elements spanning only across a single line.
+
+==Basic Markup==
+
+All of the basic inline markup is supported, as demonstrated throughout this page.
+
+==Wiki-style Links==
 
 Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
 
-Images are also handled:
+== Image Links ==
 
 Without a link:
 `[http://s11n.net/img/logo/logo.lightblue.jpg]`
@@ -34,8 +41,9 @@ With a link:
 
 [http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]
 
+= Block-level Markup =
 
-=Source code blocks=
+==Source code blocks==
 
 {{{
 if( (i < 10) && (i > 1) ) {
@@ -43,7 +51,7 @@ if( (i < 10) && (i > 1) ) {
 }
 }}}
 
-=Block Quotes=
+==Block Quotes==
 
 Someone once said:
 
@@ -51,7 +59,7 @@ Someone once said:
   of a quote that is so important that it should be visually separate
   from the rest of the text in which it appears.
 
-=Lists=
+==Lists==
 
 As of r140, nested lists are supported.
 
@@ -70,17 +78,18 @@ As of r140, nested lists are supported.
   # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
 
 
-=Tables=
+==Tables==
 
 || cell 0,0 || ,,cell 1,0,, || ^cell 2,0^ ||
 || ~~*cell 0,1*~~ || ~~cell 1,1~~ || _cell 2,1_ ||
 || ^*cell 0,2*^ (LOL! !GoCo doesn't handle superscripted bold, but our parser does) || cell 1,2 || *cell 2,2* ||
 
-=Misc.=
+==Horizontal Lines==
 
 The HR element is represented by `----` on a line by its own:
 ----
 
-=Missing=
+
+=Blatantly Missing Features=
 
  * Gadgets and other features which require Google or browser-level infrastructure (since the parser is not tied to browser environments).
