@@ -7,6 +7,7 @@
 
 ==Requirements==
 
+  * Our [http://code.google.com/p/wikiwym/source/checkout source code].
   * PHP5 with JSON support and the the so-called `fopen()` wrappers, which allow PHP to open remote URLs using `fopen()`.
   * It is untested on non-Apache servers and is known to not work on Windows servers (but _why_ is unknown).
 
@@ -29,6 +30,6 @@ In your Apache configuration, add:
 </VirtualHost>
 }}}
 
-Restart Apache and then point your browser at http://wikiwym/.
+Restart Apache and then point your browser at `http://wikiwym/`.
 
 If all goes well, you'll then have a running copy of the server and client.
