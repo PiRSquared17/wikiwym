@@ -34,12 +34,8 @@ var g = new GoogleWikiCodeParser();
 var html = g.parse( " ... wiki markup code ..." );
 }}}
 
-The file [http://code.google.com/p/wikiwym/source/browse/trunk/lib/parser.js parser.js] uses the Prototype JS library to provide a as-you-type preview of wiki code. It is demonstrated at [http://wikiwym.googlecode.com/svn/trunk/index.html].
-
-There is another live demo, based on jQuery and the `GoogleWikiCodeParser` class, at: [http://wikiwym.googlecode.com/svn/trunk/index-jquery.html].
-
-There is yet another one here:
+To see various live demos, visit out demo page:
 
   * [http://fossil.wanderinghorse.net/demos/wikiwym/]
 
-That one allows you to browser any Google Code-hosted project's wiki pages, provided those pages are in the default location in the project's Subversion repository. That's a great way to find bugs in this code :).
+From there you can preview any Google Code-hosted project's wiki pages using our online preview tool.
