@@ -27,6 +27,8 @@ All of the basic inline markup is supported, as demonstrated throughout this pag
 
 Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
 
+The exception to this rule is arbitrary wiki-words with a `!` prefix, e.g. `!``JavaScript`. In that case, the `!` is elided, as it is in !GoCo.
+
 == Image Links ==
 
 Without a link:
