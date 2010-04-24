@@ -81,5 +81,4 @@ The HR element is represented by `----` on a line by its own:
 
 =Missing=
 
- * Nested lists.
- * ???
+ * Gadgets and other features which require Google or browser-level infrastructure (since the parser is not tied to browser environments).
