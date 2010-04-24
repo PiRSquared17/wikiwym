@@ -1,6 +1,8 @@
 #summary This page demonstrates the supported parser features.
 #labels Featured
 
+<wiki:toc max_depth='3'></wiki:toc>
+
 = Introduction =
 
 This page demonstrates the various wiki markup which is working (or believed to be working) in the [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js current parser code].
