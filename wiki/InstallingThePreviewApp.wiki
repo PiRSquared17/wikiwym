@@ -1,0 +1,34 @@
+#summary How to install the previewer application on a web server.
+<wiki:toc></wiki:toc>
+
+= Installing the Preview App =
+
+[http://fossil.wanderinghorse.net/demos/wikiwym/ Our online previewer application] can be installed as follows...
+
+==Requirements==
+
+  * PHP5 with JSON support and the the so-called `fopen()` wrappers, which allow PHP to open remote URLs using `fopen()`.
+  * It is untested on non-Apache servers and is known to not work on Windows servers (but _why_ is unknown).
+
+= Setting up Apache =
+
+If you run Apache/PHP locally then...
+
+Add an entry to your `/etc/hosts` (or equivalent):
+
+{{{
+127.0.0.1 localhost <any local aliases> wikiwym
+}}}
+
+In your Apache configuration, add:
+
+{{{
+<VirtualHost *:80>
+    ServerAlias wikiwym
+    DocumentRoot /path/to/wikiwym
+</VirtualHost>
+}}}
+
+Restart Apache and then point your browser at http://wikiwym/.
+
+If all goes well, you'll then have a running copy of the server and client.
