@@ -1,4 +1,3 @@
-
 #summary How to install the previewer application on a web server.
 <wiki:toc></wiki:toc>
 
@@ -10,7 +9,7 @@
 
   * Our [http://code.google.com/p/wikiwym/source/checkout source code].
   * PHP5 with JSON support and the the so-called `fopen()` wrappers, which allow PHP to open remote URLs using `fopen()`.
-  * The web server must be able to open http connections to `code.google.com`. On a home server this is not normally a problem, but can be if inside a firewall which restrict's the server's access to the outside world (e.g. an organization where servers cannot resolve external hostnames).
+  * The web server must be able to open http connections to `XXX.googlecode.com`, where `XXX` is an arbitrary Google Code-hosted project name. On a home server this is not normally a problem, but can be if inside a firewall which restrict's the server's access to the outside world (e.g. an organization where servers cannot resolve external hostnames).
   * It is untested on non-Apache servers and is known to not work on Windows servers (but _why_ is unknown).
 
 = Setting up Apache =
