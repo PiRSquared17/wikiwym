@@ -62,7 +62,7 @@ As of r140, nested lists are supported.
     # Item is ,,subscripted,,.
     # Item is ^superscripted^.
       * Item is ~~*stricken boldly*~~.
-      # Item is *~~boldly stricken~~* (ans is different list type than its neighbors).
+      # Item is *~~boldly stricken~~* (and is different list type than its neighbors).
       * Item is _*~~boldly stricken with emphasis~~*_.
   # Do `<backticks block parsing of <`? (works as of r35)
   # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
