@@ -2,6 +2,9 @@
 
 Project-related news (newest items at the top)...
 
+*24 April 2010:*
+  * Added nested lists support. `<wiki:toc/>` is now implemented in terms of nested lists.
+
 *23 April 2010:*
   * The Subversion branch named "stable" is now the "release" branch. Clients who don't want to download broken code should use that branch instead of the trunk (which most people instinctively tend to download).
 
