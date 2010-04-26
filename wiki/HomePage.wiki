@@ -19,10 +19,8 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
 
 *Primary Misfeatures:*
 
-  * Certain wiki markup is not yet supported. See [SupportedWikiSyntax].
-  * "Inline" markup (bold, italics, etc. i.e. all markup which is not for block-level items) is only processed within a single line. i'm not 100% sure we have the same meaning of "end of line" as !GoCo does.
-  * Nested lists aren't yet implemented.
-  * Support for `<wiki:toc>` is only partially implemented.
+  * Certain wiki markup is not supported. See [SupportedWikiSyntax].
+  * "Inline" markup (bold, italics, etc. i.e. all markup which is not for block-level items) is only processed within a single line. And i'm not 100% sure we have the same meaning of "end of line" as !GoCo does.
   * There are not yet many configurable options. Use it as-is or hack it to suit.
 
 =Ultra-mini HOWTO=
