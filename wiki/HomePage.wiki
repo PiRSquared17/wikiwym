@@ -40,4 +40,4 @@ From there you can preview any Google Code-hosted project's wiki pages using our
 
 =Related Works=
 
-  * [http://remysharp.com/2008/04/01/wiki-to-html-using-javascript/], by Remy Sharp, supports a MediaWiki-like wiki syntax.
+  * [http://remysharp.com/2008/04/01/wiki-to-html-using-javascript/], by Remy Sharp, supports a !MediaWiki-like wiki syntax.
