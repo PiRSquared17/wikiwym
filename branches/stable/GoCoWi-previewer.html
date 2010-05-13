@@ -121,7 +121,7 @@
           }
         });
         if(1)
-        {  // Add a visual notification when JSONRequest messages are pending...
+        {  // Add a visual notification when JSONMessage.Request messages are pending...
             var notif = jQuery('#ajaxNotification');
             notif.hide();
             notif.postCount = 0;
@@ -129,15 +129,15 @@
             notif.updateMessage = function(n)
             {
                 this.postCount += n;
-                this.text( this.postCount + ' pending JSONRequest connection(s)...' );
+                this.text( this.postCount + ' pending JSONMessage.Request connection(s)...' );
                 if( 1 == this.postCount ) this.fadeIn(this.fadeSpeed);
                 else if( ! this.postCount ) this.fadeOut(this.fadeSpeed);
             };
-            JSONRequest.options.ajax.beforePost = function(req,opt)
+            JSONMessage.Request.options.ajax.beforePost = function(req,opt)
             {
                 notif.updateMessage(1);
             };
-            JSONRequest.options.ajax.afterPost = function(req,opt)
+            JSONMessage.Request.options.ajax.afterPost = function(req,opt)
             {
                 notif.updateMessage(-1);
             };
@@ -269,7 +269,7 @@
         }
     }
 
-    // JSONRequest.post() onResponse() handler.
+    // JSONMessage.Request.post() onResponse() handler.
     function processLoadedWikiPage(resp,req)
     {
         if( 0 != resp.resultCode() )
@@ -291,7 +291,7 @@
         ThisApp.textarea.text("Loading page "+ThisApp.project+'/'+pageName+' from Google Code subversion...');
         updateView();
         //alert("Clicked "+pg);
-        var r = new JSONRequest({type:'googlecode/getWikiPage',
+        var r = new JSONMessage.Request({type:'googlecode/getWikiPage',
                 payload:{
                     project:ThisApp.project,
                     page:pageName
@@ -299,7 +299,7 @@
         r.post( {onResponse:processLoadedWikiPage} );
     }
 
-    // JSONRequest.post() onResponse() handler.
+    // JSONMessage.Request.post() onResponse() handler.
     function processLoadedProjectList(resp,req)
     {
         if( 0 != resp.resultCode() )
@@ -350,7 +350,7 @@
             return;
         }
         ThisApp.pageList.empty().text('Loading wiki page list for '+proj+'...');
-        var r = new JSONRequest({type:'googlecode/getWikiList',
+        var r = new JSONMessage.Request({type:'googlecode/getWikiList',
                     payload:{
                         project:proj
                     }});
@@ -370,60 +370,61 @@
   </script>
 </head>
 <body>
-	<div>
-		Google Code project name: <input type='text' id='GoCoProjectName' size='20' value='wikiwym'/>
-    or: 
-		<select id='SelectProject' title='These projects were selected because they have nice test pages :)'>
+    <div style='text-align:center;padding:0px;margin:0px;'>
+    <h2><a href='http://code.google.com/p/wikiwym'>Wikiwym</a> Preview Application</h2>
+    Enter a Google Code project name: <input type='text' id='GoCoProjectName' size='20' value='wikiwym'/>
+    or:
+		<select id='SelectProject' title='These projects were selected because i contribute to them or they have nice test pages :).'>
 	    <option>--Select Project--</option>
-	    <option>beup</option>
-	    <option>v8</option>
+	    <option>wikiwym</option>
 	    <option>v8-juice</option>
+	    <option>jsonmessage</option>
+	    <option>whefs</option>
+	    <option>qboard</option>
+	    <option>v8</option>
 	    <option>v8cgi</option>
 	    <option>yapeal</option>
-	    <option>qboard</option>
-	    <option>whefs</option>
-	    <option>wikiwym</option>
 	    <option>cproxyv8</option>
+	    <option>beup</option>
     </select>
-    or: 
-		<button onclick="goHome()">Home</button>
+    or: <button onclick="goHome()">Home</button>
 	</div>
 	
 	<div id="WikiPageList">
 		When a project is selected, its wiki pages will be listed here.
   </div>
 	
-  <table class="layout">
+  <table class="layout" style='margin:0.5em;width:98%;'>
   <tr>
 <!--  	<td><strong>Google Code-style Wiki Markup</strong></td>-->
-    <td colspan='2' align='right' valign='bottom'>
-    <div>
+    <td colspan='2'> <!--align='right' valign='bottom'-->
       <h2 style='float:left; clear:none;'>Google Code-style Wiki Markup:</h2>
-      <fieldset title="Switch view modes.">
-        <legend>View Modes</legend> 
-        <label><input type="radio" name="viewMode" value="preview" checked="checked"/> Preview</label>
-        <label><input type="radio" name="viewMode" value="diff" /> Diff</label>
-        <label><input type="radio" name="viewMode" value="html" /> HTML</label>
-      </fieldset>
-      <fieldset title="Change when the preview is updated.">
-        <legend>Update preview on...</legend>
-        <label><input type="radio" name="updateMode" value="enter" checked="checked"/>ENTER</label>
-        <label><input type="radio" name="updateMode" value="keypress" />Keypress</label>
-        <label><input type="radio" name="updateMode" value="timer" />Timer:
-            <select id='timerValue'>
-            <option value='3000'>3s</option>
-            <option value='5000'>5s</option>
-            <option value='10000' selected>10s</option>
-            <option value='30000'>30s</option>
-            <option value='60000'>60s</option>
-            </select>
-        </label>
-      </fieldset>
-      <fieldset title="Note that warnings may be caused by some malformed wiki code or bugs in this parser">
-        <legend>Options</legend> 
-        <label><input type="checkbox" id="optionEnableWarnings" /> Disable warnings?</label>
-      </fieldset>
-    </div>
+      <div style='float:right; clear:none;'>
+        <fieldset title="Switch view modes.">
+          <legend>View Modes</legend> 
+          <label><input type="radio" name="viewMode" value="preview" checked="checked"/>Preview</label>
+          <label><input type="radio" name="viewMode" value="html" />HTML</label>
+          <label><input type="radio" name="viewMode" value="diff" />Diff</label>
+        </fieldset>
+        <fieldset title="Change when the preview is updated.">
+          <legend>Update preview on...</legend>
+          <label><input type="radio" name="updateMode" value="enter" checked="checked"/>ENTER</label>
+          <label><input type="radio" name="updateMode" value="keypress" />Keypress</label>
+          <label><input type="radio" name="updateMode" value="timer" />Timer:
+              <select id='timerValue'>
+              <option value='3000'>3s</option>
+              <option value='5000'>5s</option>
+              <option value='10000' selected>10s</option>
+              <option value='30000'>30s</option>
+              <option value='60000'>60s</option>
+              </select>
+          </label>
+        </fieldset>
+        <fieldset title="Note that warnings may be caused by some malformed wiki code or bugs in this parser">
+          <legend>Options</legend> 
+          <label><input type="checkbox" id="optionEnableWarnings" /> Disable warnings?</label>
+        </fieldset>
+      </div>
     </td>
   </tr>
   <tr>
@@ -444,24 +445,24 @@ to run this application. Sorry. Try <a href='http://www.google.com/chrome'>Googl
 <div id='DefaultWikiText' style='visibility:hidden'>
 =[http://code.google.com/p/wikiwym Wikiwym] demonstration!=
 
-This page demonstrates wikiwym, a !JavaScript wiki syntax parser
-which supports a large subset of the Google Code wiki syntax.
+This page demonstrates wikiwym, a !JavaScript wiki syntax parser which supports a large subset of the Google Code wiki syntax.
 
 =Using this Application=
+
 In the text field at the top of the screen you can enter the name of a project hosted at
 [http://code.google.com Google Code] to load the list of wiki pages for that project
 (taken from their SVN repository). Then click on a page name to preview it here.
 
-You can edit the wiki markup. Changes made will be updates in the preview/diff view
-when you tap Enter or click the Update button.
-
+You can edit the wiki markup. Changes made will be reflected in the preview/diff/HTML
+views on the right-hand side. (_When_ the updates happen depend on the Update settings,
+which can be changed via the menu at the top.)
 
 =About this Application=
 This app was written by [http://wanderinghorse.net/home/stephan/ Stephan Beal] with help from:
 
   * [http://code.google.com/p/wikiwym Wikiwym] for the wiki-to-HTML conversion.
   * [http://code.google.com/u/fabien.menager/ Fabien M&#0233;nager], co-developer of Wikiwym, provided the initial inspiration and made this UI pretty.
-  * The [http://fossil.wanderinghorse.net/repos/JSONMessage JSONMessage] framework collects the wiki pages from google.
+  * The [http://code.google.com/p/jsonmessage JSONMessage] framework collects the wiki pages from google.
   * [http://www.jquery.com jQuery] simplifies the DOM manipulation and UI interaction.
   * [http://code.google.com/p/google-code-prettify/ google-code-prettify] does the syntax highlighting in wiki source code blocks and the HTML preview.
   * [http://snowtide.com/jsdifflib Chas Emerick] wrote the "diff" view code.
