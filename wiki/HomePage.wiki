@@ -23,6 +23,17 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
   * "Inline" markup (bold, italics, etc. i.e. all markup which is not for block-level items) is only processed within a single line. And i'm not 100% sure we have the same meaning of "end of line" as !GoCo does.
   * There are not yet many configurable options. Use it as-is or hack it to suit.
 
+= Getting and Installing =
+
+  * Download the parser (a single file) from our source repo:
+    * [http://wikiwym.googlecode.com/svn/branches/stable/lib/GoogleCodeWikiParser.js stable branch]
+    * [http://wikiwym.googlecode.com/svn/trunk/lib/GoogleCodeWikiParser.js latest branch]
+  * Include it in your HTML page.
+
+You are of course free to "minimize" the source code using a minimizer of your choice, e.g. [http://www.crockford.com/javascript/jsmin.html Douglas Crockford's jsmin]. As of this writing (20100513), minimizing alone reduces the size by about 2/3rds. Compressing it using one of the common JS packers can reduce it by about 70-75%. Compressing it with gzip (or serving it from a server which supports such output compression), without minimizing/packing it first, provides only slightly smaller results than minimization, but provides can halve the size of a minified/packed copy. In my tests, the best reduction and is obtained by combination is minify/gzip (this is also more performant, as it requires no unpacking in the client JS engine).
+
+The source tree [http://code.google.com/p/wikiwym/source/browse/#svn/trunk/pack contains utility code for packing/minifying the parser].
+
 =Ultra-mini HOWTO=
 
 The source tree has several files, in various stages of completion. The core parser code is in [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js GoogleWikiCodeParser.js], and is used like this:
