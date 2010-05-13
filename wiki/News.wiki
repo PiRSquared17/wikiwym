@@ -2,6 +2,9 @@
 
 Project-related news (newest items at the top)...
 
+*13 May 2010:*
+  * Updated the code so it runs properly after being minified/packed.
+
 *24 April 2010:*
   * Added nested lists support. `<wiki:toc/>` is now implemented in terms of nested lists.
 
