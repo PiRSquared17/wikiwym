@@ -5,7 +5,7 @@
 
 Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reasonably imitate the Google Code wiki format.
 
-*Code status:* early beta. Most of the core features work, but there are some features to add and some corner cases to check/fix.
+*Code status:* "It essentially works." See [SupportedWikiSyntax] for examples of what works and what doesn't.
 
 *License:* MIT
 
@@ -30,7 +30,7 @@ Wikiwym is wiki syntax parser, implemented in !JavaScript, which tries to reason
     * [http://wikiwym.googlecode.com/svn/trunk/lib/GoogleCodeWikiParser.js latest branch]
   * Include it in your HTML page.
 
-You are of course free to "minimize" the source code using a minimizer of your choice, e.g. [http://www.crockford.com/javascript/jsmin.html Douglas Crockford's jsmin]. As of this writing (20100513), minimizing alone reduces the size by about 2/3rds. Compressing it using one of the common JS packers can reduce it by about 70-75%. Compressing it with gzip (or serving it from a server which supports such output compression), without minimizing/packing it first, provides only slightly smaller results than minimization, but provides can halve the size of a minified/packed copy. In my tests, the best reduction and is obtained by combining minification and gzip (this is also more performant, as it requires no unpacking in the client JS engine).
+You are of course free to "minimize" the source code using a minimizer of your choice, e.g. [http://www.crockford.com/javascript/jsmin.html Douglas Crockford's jsmin]. As of this writing (20100513), minimizing alone reduces the size by about 2/3rds. Compressing it using one of the common JS packers can reduce it by about 70-75%. Compressing it with gzip (or serving it from a server which supports such output compression), without minimizing/packing it first, provides only slightly smaller results than minimization, but can halve the size of a minified/packed copy. In my tests, the best reduction is obtained by combining minification and gzip (this is also more performant, as it requires no unpacking in the client JS engine).
 
 The source tree [http://code.google.com/p/wikiwym/source/browse/#svn/trunk/pack contains utility code for packing/minifying the parser].
 
