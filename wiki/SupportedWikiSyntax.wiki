@@ -1,6 +1,5 @@
-#labels Featured
-
 #summary This page demonstrates the supported parser features.
+#labels Featured
 
 <wiki:toc max_depth='3'></wiki:toc>
 
