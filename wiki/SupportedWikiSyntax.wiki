@@ -5,7 +5,102 @@
 
 = Introduction =
 
+This page demonstrates the various wiki markup which is working (or believed to be working) in the [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js current parser c#summary This page demonstrates the supported parser features.
+
+<wiki:toc max_depth='3'></wiki:toc>
+
+= Introduction =
+
 This page demonstrates the various wiki markup which is working (or believed to be working) in the [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js current parser code]. If you view this page using [http://fossil.wanderinghorse.net/demos/wikiwym/GoCoWi-previewer.html our wiki previewer application], the content should look more or less just like it does when rendered via the Google Code wiki site.
+
+The goal is not to achieve 100% compatibility with !GoCo, but to have a tool which can be used to provide a reasonably accurate preview of a !GoCo-formatted page before committing it to a !GoCo-hosted project's source code repository. It "could" be used as the bases of a standalone wiki implementation, but that's not the goal.
+
+A good way to get a feel for what this code can and cannot do is to browse your own wiki pages with it:
+
+  * [http://fossil.wanderinghorse.net/demos/wikiwym/]
+
+From there you can browse the wiki pages from any Google Code project which has wiki pages in its Subversion repository, and they will be rendered by this code. You can also use it as an editor, including a preview, and then copy/paste the changes back into Google Code when you're happy with them.
+
+=Inlined Markup=
+
+"Inlined" markup is stuff like *bold* and _emphasis_, which appear on elements spanning only across a single line.
+
+==Basic Markup==
+
+All of the basic inline markup is supported, as demonstrated throughout this page.
+
+==Wiki-style Links==
+
+Wiki-words are _not_ linked by default - only those in `[ThisSyntax]` or `[ThisSyntax label string]` are handled. e.g. [HomePage] gets linked but HomePage does not. Remote URLs are also handled only if they are bracketed (e.g. [http://code.google.com/p/v8-juice]).
+
+The exception to this rule is arbitrary wiki-words with a `!` prefix, e.g. `!``JavaScript`. In that case, the `!` is elided, as it is in !GoCo.
+
+== Image Links ==
+
+Without a link:
+`[http://s11n.net/img/logo/logo.lightblue.jpg]`
+
+[http://s11n.net/img/logo/logo.lightblue.jpg]
+
+With a link:
+`[http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]`
+
+[http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]
+
+= Block-level Markup =
+
+==Source code blocks==
+
+{{{
+if( (i < 10) && (i > 1) ) {
+    print("hi, world!");
+}
+}}}
+
+Source code highlighting depends on external libraries - this parser does not do the coloring. It is normally fairly easy to add support for a specific pretty-printer.
+
+==Block Quotes==
+
+Someone once said:
+
+  This sentence will be quoted in the future as the canonical example
+  of a quote that is so important that it should be visually separate
+  from the rest of the text in which it appears.
+
+==Lists==
+
+As of r140, nested lists are supported.
+
+  * Item is _emphasized_.
+    * Item is *bold*.
+    * Item is *_emphasized bold_*.
+  * Item is `backticked`.
+
+  # Item is ~~stricken~~.
+    # Item is ,,subscripted,,.
+    # Item is ^superscripted^.
+      * Item is ~~*stricken boldly*~~.
+      # Item is *~~boldly stricken~~* (and is different list type than its neighbors).
+      * Item is _*~~boldly stricken with emphasis~~*_.
+  # Do `<backticks block parsing of <`? (works as of r35)
+  # Can we *`bold backticked data`*? Of course. But not if we do `*asterisk inside the backticks*`.
+
+
+==Tables==
+
+|| cell 0,0 || ,,cell 1,0,, || ^cell 2,0^ ||
+|| ~~*cell 0,1*~~ || ~~cell 1,1~~ || _cell 2,1_ ||
+|| ^*cell 0,2*^ (LOL! !GoCo doesn't handle superscripted bold, but our parser does) || cell 1,2 || *cell 2,2* ||
+
+==Horizontal Lines==
+
+The HR element is represented by `----` on a line by its own:
+----
+
+
+=Blatantly Missing Features=
+
+ * Gadgets and other features which require Google or browser-level infrastructure (since the parser is not tied to browser environments).ode]. If you view this page using [http://fossil.wanderinghorse.net/demos/wikiwym/GoCoWi-previewer.html our wiki previewer application], the content should look more or less just like it does when rendered via the Google Code wiki site.
 
 The goal is not to achieve 100% compatibility with !GoCo, but to have a tool which can be used to provide a reasonably accurate preview of a !GoCo-formatted page before committing it to a !GoCo-hosted project's source code repository. It "could" be used as the bases of a standalone wiki implementation, but that's not the goal.
 
