@@ -1,6 +1,11 @@
 #summary Announcements of interesting goings-on vis-a-vis this project.
+#labels Featured
 
 Project-related news (newest items at the top)...
+
+*27 April 2011:*
+  * This was just brought to my attention: [http://angrycoding.blogspot.com/2011/04/recreating-google-code-wiki-with.html an article about using wikiwym and adding code-block syntax highlighting]
+
 
 *13 May 2010:*
   * Updated the code so it runs properly after being minified/packed.
