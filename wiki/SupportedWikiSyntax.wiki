@@ -7,7 +7,7 @@
 
 This page demonstrates the various wiki markup which is working (or believed to be working) in the [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js current parser code]. If you view this page using [http://fossil.wanderinghorse.net/demos/wikiwym/GoCoWi-previewer.html our wiki previewer application], the content should look more or less just like it does when rendered via the Google Code wiki site.
 
-The goal is not to achieve 100% compatibility with !GoCo, but to have a tool which can be used to provide a reasonably accurate preview of a !GoCo-formatted page before committing it to a !GoCo-hosted project's source code repository. It "could" be used as the bases of a standalone wiki implementation, but that's not the goal.
+The goal is not to achieve 100% compatibility with !GoCo, but to have a tool which can be used to provide a reasonably accurate preview of a !GoCo-formatted page before committing it to a !GoCo-hosted project's source code repository. It "could" be used as the basis of a standalone wiki implementation, but that's not the goal. (Having said that, as of Easter 2011 we have a site which uses wikiwym as its core wiki renderer: [http://fossil.wanderinghorse.net/demos/whiki/].)
 
 A good way to get a feel for what this code can and cannot do is to browse your own wiki pages with it:
 
