@@ -3,6 +3,9 @@
 
 Project-related news (newest items at the top)...
 
+*1 May 2011:*
+  * Bruno Santos just made me aware of [http://code.google.com/p/wikignpi/ the wikignpi project], based off of wikiwym but adding several significant features.
+
 *27 April 2011:*
   * This was just brought to my attention: [http://angrycoding.blogspot.com/2011/04/recreating-google-code-wiki-with.html an article about using wikiwym and adding code-block syntax highlighting]
   * The hash (`#`) and forward-slash (`/`) characters are now legal first characters for wiki-word links.
