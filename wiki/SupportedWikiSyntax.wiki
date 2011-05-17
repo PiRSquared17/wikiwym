@@ -11,13 +11,13 @@ The goal is not to achieve 100% compatibility with !GoCo, but to have a tool whi
 
 A good way to get a feel for what this code can and cannot do is to browse your own wiki pages with it:
 
-  * [http://fossil.wanderinghorse.net/demos/wikiwym/]
+  * [http://whiki.wanderinghorse.net/demos/wikiwym/]
 
 From there you can browse the wiki pages from any Google Code project which has wiki pages in its Subversion repository, and they will be rendered by this code. You can also use it as an editor, including a preview, and then copy/paste the changes back into Google Code when you're happy with them.
 
 Or you can see a custom full-fledged wiki site which uses this parser as its main renderer:
 
-  * [http://fossil.wanderinghorse.net/demos/whiki/]
+  * [http://whiki.wanderinghorse.net/]
 
 =Inlined Markup=
 
