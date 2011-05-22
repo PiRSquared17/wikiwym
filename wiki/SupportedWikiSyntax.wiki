@@ -45,6 +45,17 @@ With a link:
 
 [http://s11n.net http://s11n.net/img/logo/logo.lightblue.jpg]
 
+
+== Table of Contents ==
+
+Add a tag which looks like this to your page to have it generate a table of contents from all headers:
+
+{{{
+<wiki:toc max_depth="4"></wiki:toc>
+}}}
+
+The `max_depth` value specifies the header levels which should be included in the !ToC. e.g. set it to 1 to include only `H1` headers and 2 to also include `H2` headers.
+
 = Block-level Markup =
 
 ==Source code blocks==
