@@ -3,6 +3,9 @@
 
 Project-related news (newest items at the top)...
 
+*22 May 2011:*
+  * The site [http://whiki.wanderinghorse.net/] demonstrates a full-featured wiki browser/editor (including saving if one has an account), implemented using HTML, !JavaScript, and a CGI-based back-end. It uses wikiwym as the primary wiki renderer.
+
 *1 May 2011:*
   * Bruno Santos just made me aware of [http://code.google.com/p/wikignpi/ the wikignpi project], based off of wikiwym but adding several significant features.
 
