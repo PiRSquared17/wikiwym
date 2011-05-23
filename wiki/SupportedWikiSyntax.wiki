@@ -67,7 +67,7 @@ if( (i < 10) && (i > 1) ) {
 }}}
 
 Source code highlighting requires third-party support. This parser does not colorize
-code blocks by itself. It is normally fairly easy to add this to the generated HTML output.
+code blocks by itself. It is normally fairly easy to add this to the generated HTML output. See [http://angrycoding.blogspot.com/2011/04/recreating-google-code-wiki-with.html this article] for a tutorial describing how to do so.
 
 ==Block Quotes==
 
