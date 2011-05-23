@@ -1,6 +1,8 @@
 #summary How to use wikiwym in your web pages
 #labels Featured
 
+<wiki:toc max_depth='3'></wiki:toc>
+
 = Adding wikiwym to a Web Page =
 
 It's really, really easy....
@@ -45,7 +47,13 @@ prettyPrint();
 
 Every time new parsed content is added to the DOM, `prettyPrint()` must be called in order to process the results. If you do not do this then the code blocks will not get syntax-highlighted.
 
-If you need to customize how the parser generates links, you can override its `createLink()` member like this:
+=Using wikiwym without a Browser=
+
+The wikiwym parser is not dependent on a browser environment and thus can be used from arbitrary !JavaScript engines which support loading external files, e.g. Mozilla Rhino or one of the shells based on Google v8. Usage is unchanged in non-browser environments, but how the script is loaded depends on the engine/shell being used.
+
+=Customizing Link Generation=
+
+If you need to customize how the parser generates links (e.g. so that you can add logic to make your app respond sensibly to intra-wiki links), you can override its `createLink()` member like this:
 
 {{{
 // Approach #1: globally replace the createLink() member:
@@ -57,7 +65,3 @@ GoogleCodeWikiParser.prototype.createLink = function(where,label) {
 // Approach #2: replace createLink() for a single instance:
 p.createLink = function(where,label) { ... }
 }}}
-
-=Using wikiwym without a Browser=
-
-The wikiwym parser is not dependent on a browser environment and thus can be used from arbitrary !JavaScript engines which support loading external files, e.g. Mozilla Rhino or one of the shells based on Google v8. Usage is unchanged in non-browser environments, but how the script is loaded depends on the engine/shell being used.
