@@ -21,6 +21,8 @@ If you want the wikified source code blocks then you need the pretty-printing co
 <link type='text/css' href="http://wikiwym.googlecode.com/svn/branches/stable/lib/prettify/prettify.css"/>
 }}}
 
+Note the word `stable` in the paths shown above. If you want the _latest_ code, replace `branches/stable` with `trunk`. But since any commit in the trunk branch might be broken and might not get fixed quickly, we _strongly recommend_ that clients pull from the `stable` branch.
+
 In your !JavaScript it can then be used like this:
 
 {{{
