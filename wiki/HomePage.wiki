@@ -36,6 +36,8 @@ The source tree [http://code.google.com/p/wikiwym/source/browse/#svn/trunk/pack 
 
 =Ultra-mini HOWTO=
 
+See also: [HowTo]
+
 The source tree has several files, in various stages of completion. The core parser code is in [http://code.google.com/p/wikiwym/source/browse/trunk/lib/GoogleCodeWikiParser.js GoogleWikiCodeParser.js], and is used like this:
 
 {{{
