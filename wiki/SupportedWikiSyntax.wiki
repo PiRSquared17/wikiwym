@@ -1,7 +1,11 @@
 #summary This page demonstrates the supported parser features.
 #labels Featured
 
-<wiki:toc max_depth='3'></wiki:toc>
+*Table of Contents:*
+
+<wiki:toc max_depth='3'/>
+
+The TOC is generated from all header entries by adding the `<wiki:toc/>` tag, which optionally takes a `max_depth=N` parameter, where `N` is the maximum header depth to include in the TOC.
 
 = Introduction =
 
