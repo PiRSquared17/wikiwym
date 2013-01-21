@@ -816,7 +816,7 @@ GoogleCodeWikiParser.prototype.createLink = function(where,label) {
 GoogleCodeWikiParser.prototype.parse = function(text) {
   //if( 'string' !== typeof text ) return ''; // Prototype-specific kludge
   this.hList = [];
-  this.lines = text ? text.split(/\r?\n/) : [];
+  this.lines = (text ? text.replace('\r', '').split('\n') : []) || [] /* See ticket #25. */;
   this.lineNo = 0;
   this.blockLines = [];
 
